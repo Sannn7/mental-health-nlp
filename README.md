@@ -135,32 +135,7 @@ python -m src.search.semantic_search --query "feeling hopeless and isolated"
 
 ---
 
-## Key Design Decisions (for interview discussions)
-
-**Why watch-out for data leakage?**
-The cleaner produces *two* versions of each post — one for deep learning
-(minimal processing, preserves subword context for BERT) and one for classical
-ML (aggressive lemmatization + stopword removal). Mixing these would leak
-preprocessing decisions into evaluation.
-
-**Why compare extractive vs abstractive summarization?**
-Extractive is cheap and reproducible; abstractive can hallucinate. ROUGE scores
-let you quantify the gap and defend your design choice.
-
-**Why FAISS for search?**
-FAISS approximate nearest neighbour search at < 100K docs has sub-millisecond
-latency — the same infrastructure used in the YouTube two-tower retrieval stage
-(your recsys project). This makes both projects tell a coherent story about
-dense retrieval.
-
-**Why VADER alongside BERT sentiment?**
-VADER is rule-based and interpretable — zero compute, explainable output.
-BERT is contextual but a black box. Comparing both surfaces the accuracy vs
-interpretability trade-off, which interviewers love to probe.
-
----
-
-## Next Extensions (if time permits)
+## Next Extensions
 
 - Add a Streamlit demo that takes a free-text input and returns:
   predicted label, key entities, similar posts, and a cluster summary
